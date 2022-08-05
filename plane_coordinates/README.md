@@ -24,6 +24,6 @@ coordinateSystem.add(axes);
 
 # Screenshot of the web page
 
-![](plane_coordinates/screenshot.png)
+![](./images/screenshot.png)
 
 
