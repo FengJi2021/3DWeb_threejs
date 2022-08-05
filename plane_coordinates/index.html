@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plane Coordination</title>
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@latest/build/three.module.js"
+          }
+        }
+    </script>
+</head>
+<body>
+    <div class="webgl-output"></div>
+    <script type="module">
+        import * as THREE from 'three';
+        function init(){
+            // create a scene
+            var scene = new THREE.Scene();
+            // create a camera
+            var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            // create a renderer
+            var renderer = new THREE.WebGLRenderer();
+            // set the initial color
+            renderer.setClearColor(0x000000, 1.0);
+            // set the size of the renderer
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            // add 3d coordination to the scene
+            var axes = new THREE.AxesHelper(20);
+            scene.add(axes);
+            // create a plane
+            var plane = new THREE.PlaneGeometry(60, 20);
+            // create a material
+            var material = new THREE.MeshBasicMaterial({color: 0xffffff});
+            // create a mesh
+            var mesh = new THREE.Mesh(plane, material);
+            // set the position of the mesh
+            mesh.position.x = 15;
+            mesh.position.y = 0;
+            mesh.position.z = 0;
+            mesh.rotation.x = -0.5 * Math.PI;
+            // add the mesh to the scene
+            scene.add(mesh);
+            // setup the camera
+            camera.position.x = -30;
+            camera.position.y = 30;
+            camera.position.z = 30;
+            camera.lookAt(scene.position);
+            // add the camera to the scene
+            scene.add(camera);
+            // add the renderer to the page
+            document.querySelector('.webgl-output').appendChild(renderer.domElement);
+            // render the scene
+            renderer.render(scene, camera);
+
+
+        }
+        window.onload = init;
+    </script>
+</body>
+</html>
